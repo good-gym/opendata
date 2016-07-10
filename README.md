@@ -1,7 +1,7 @@
 # GoodGym Open Data
 
 ## Open Data Endpoint
-https://www.goodgym.org/getHappenings- a feed of the data from goodgym.org
+https://www.goodgym.org/getHappenings - a feed of the session data from goodgym.org
 
 ## Standards
 The data is published to conform to [Openactive Realtime Paged Data Exchange 0.2.4](https://www.openactive.io/realtime-paged-data-exchange/0.2.4/).
