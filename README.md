@@ -1,53 +1,127 @@
-# GoodGym Open Data
+# GoodGym OpenActive Datafeed Documentation
 
-## Open Data Endpoint
-https://www.goodgym.org/api/happenings - a feed of the session data from goodgym.org
+This repository contains documentation and resources for the GoodGym OpenActive data feed. The data feed complies with the [OpenActive](https://www.openactive.io/) standard, providing structured data about our events for developers and third-party integrations.
 
-## Standards
-The data is published to conform to [Openactive Realtime Paged Data Exchange 0.2.4](https://www.openactive.io/realtime-paged-data-exchange/0.2.4/).
+## Overview
 
-## Issues, Questions and Comments
-Please raise any issues, questions or comments as a [new issue in this repository](https://github.com/goodgym-oa/opendata/issues).
+The OpenActive data feed provides real-time information about GoodGym events. Each event record is structured as a JSON-LD object, including detailed information such as event name, location, time, accessibility, and organizer details.
 
-## Data Fields
+## Example Event Record
 
-| Data Field | Example Value | Description |
-|---|---|---|
-| "organizer" | { "type": "Organization", "url": "http://www.goodgym.org/", "name": "GoodGym", "logo": "https://www.goodgym.org/assets/goodgym_red-688adde9f7d011eb16c0cafa461d8f214e93fdefe2044d10f6cf68fee52c1584.png" } | Organizer of the session: GoodGym |
-| "name" | Helping out at the Wildcat Wilderness | Title of session
-| "url" | "http://www.goodgym.org/happenings/helping-out-at-the-wildcat-wilderness | Full URL of session on GoodGym site |
-| "description" | "The chance to do some good hard interval training with a group of lovely people and top runners and do some good" | 
-| "disambiguatingDescription" | "A number of different tasks to choose from!" | Extra short description of session  |
-| "activity" | ["Volunteering", "Running"] | Description of Activity for the sessions |
-| "programme" | "Group Run" | Either Group Run or Training Session |
-| "startDate" | "2017-08-07T18:45:00Z" | Start time of session |
-| "endDate" | "2017-08-07T20:15:00Z" | End time of session |
-| "duration" | "PT90M" | Duration of session |
-| "location" | { "type": "PostalAddress", "areaServed": "Lewisham", "beta:meetingPoint": "", "description": "", "streetAddress": "Glass Mill Leisure Centre", "addressLocality": "Lewisham", "postalCode": "SE13 7FT" } | Hash of address components |
-| "leader" | { "name": "Ax Man", "email": "ax@goodgym.org", "description": "All-round running/cycling/swimming bundle of energy. Lover of Hilly Fields parkrun. Trainer at GoodGym Lewisham." } | Description of leader of the session |
-| "beta:distance" | { "value": 7, "unit": "KMT" } | Distance of the sessions |
-| "beta:level" | "intermediate" | Level of the sessions |
-| "beta:hasCoaching" | true | If the session is lead by a qualified coach |
-| "beta:registrationCount" | 1 | Number of people register to the session |
-| "image" | | Array of photos containing thumbnails (see "Thumbnails" section below) |
-| "ageRange" | "18" | All GoodGym run are 18+ |
-| "genderRestricted" | "mixed" | All GoodGym are mixed |
+Below is an example of an event record from the data feed:
 
-## Thumbnails
+```json
+{
+  "@type": "Event",
+  "@id": "https://www.goodgym.org/api/openactive/events/93670",
+  "identifier": 93670,
+  "name": "Park Hill Litter Pick - FREE refreshments afterwards at South Street Kitchen",
+  "description": "Park Hill Litter Pick \nIn association with Park Hill Residents Association. \nMeet up & Clean up on the last Saturday of each month. \nJanuary 27th \nFebruary 24th \nMarch 30th \nApril 27th \nMay 25th \nJune 29th \nJuly 27th \nAugust 31st \nSeptember 28th \nOctober 26th \nNovember 30th \nDecember 28th \nJoin anytime between 1000 - 1200. \nMeet outside the Sales Office. \nWhat 3 Words meet location: \n///loud.wheels.placed\nPickers and bags provided, please bring gloves if you have them. \nFREE refreshments afterwards at South Street Kitchen! \nPosh coffee and delicious fresh treats!\nhttps://www.southstreetkitchen.org/\nFor more info or to contact the Park Hill Residents Association who will be running the event please email: \nhello@parkhillpeople.org\nwww.parkhill.estate\n",
+  "disambiguatingDescription": "Keeping the local area spic and span and enjoying a posh coffee after",
+  "image": [
+    {
+      "@type": "ImageObject",
+      "url": "https://goodgym-uploads.s3.eu-west-1.amazonaws.com/uploads/photo/437301/image/547755b0e0e38f1af8da0dc369ee0fdc.jpg"
+    }
+  ],
+  "url": "https://www.goodgym.org/happenings/park-hill-litter-pick-free-refreshments-afterwards-at-south-street-kitchen-542ab315-48f8-4191-8e8c-f4df13f423ce?utm_medium=openactive&utm_source=default",
+  "isAccessibleForFree": true,
+  "location": {
+    "@type": "Place",
+    "name": "Sales Office ",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 53.3811194,
+      "longitude": -1.4596388
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "GB",
+      "postalCode": "S2 5QX",
+      "addressRegion": "Sheffield",
+      "streetAddress": "Sales Office , 3 & 4 South St  ",
+      "addressLocality": "Sheffield"
+    }
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "@id": "https://www.goodgym.org/api/openactive/events/93670#offer",
+      "priceCurrency": "GBP",
+      "price": 0.0
+    }
+  ],
+  "organizer": {
+    "@type": "Organization",
+    "@id": "https://www.goodgym.org",
+    "name": "GoodGym",
+    "url": "https://www.goodgym.org/?utm_medium=openactive&utm_source=default",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.goodgym.org/assets/goodgym_red-688adde9f7d011eb16c0cafa461d8f214e93fdefe2044d10f6cf68fee52c1584.png"
+    },
+    "telephone": "020 3642 0997",
+    "email": "getinvolved@goodgym.org"
+  },
+  "startDate": "2024-12-28T10:00:00+00:00",
+  "remainingAttendeeCapacity": 20,
+  "maximumAttendeeCapacity": 20,
+  "eventStatus": "https://schema.org/EventScheduled",
+  "duration": "PT2H",
+  "endDate": "2024-12-28T12:00:00+00:00",
+  "activity": [
+    {
+      "@type": "Concept",
+      "@id": "https://openactive.io/activity-list#72ddb2dc-7d75-424e-880a-d90eabe91381",
+      "inScheme": "https://openactive.io/activity-list",
+      "prefLabel": "Running"
+    }
+  ],
+  "ageRange": {
+    "@type": "QuantitativeValue",
+    "minValue": 18
+  },
+  "category": ["Volunteering"],
+  "genderRestriction": "https://openactive.io/NoRestriction",
+  "isCoached": true,
+  "leader": [
+    {
+      "@type": "Person",
+      "name": "Tom Mutton",
+      "description": "Sheffield Area Activator. PT, England Athletics Coach in Running Fitness & Tutor.  ",
+      "email": "tomm@goodgym.org"
+    }
+  ],
+  "level": ["beginner"],
+  "programme": {
+    "@type": "Brand",
+    "name": "Community Mission",
+    "url": "https://www.goodgym.org/happenings/community-missions"
+  },
+  "beta:formattedDescription": "Park Hill Litter Pick \nIn association with Park Hill Residents Association..."
+}
+```
 
-In addition to the original image, each image is cropped to a number of different sizes, the dimensions of which are listed below.
+## Key Features
+- **Real-Time Updates**: Events are updated dynamically with the latest information.
+- **OpenActive Compliant**: Fully adheres to OpenActive standards for interoperability.
+- **Detailed Event Data**: Includes event descriptions, schedules, locations, organizer details, and more.
+- **Accessibility**: Indicates whether events are free and lists accessibility details.
 
-| Thumbnail Type | Width | Height |
-|---|---|---|
-| home_wide | 848 | 600  |
-| carousel | 750 | 515 |
-| feed_letterbox | 690 | 250 |
-| background |  980 | 430 |
-| twitter_card |610 | 400 |
+## How to Use
 
-## Changelog
+1. **Access the Feed**: Fetch the data feed via the endpoint:
+   ```
+   GET https://www.goodgym.org/api/openactive/events
+   ```
+2. **Integrate with Your System**: Parse the JSON-LD data and display it in your application or use it for analytics.
 
-| Date | Changes |
-|---|---|
-| 06/06/2017 | Implementing https://www.openactive.io/modelling-opportunity-data/ version of 06/06/2017 |
-| 11/07/2016 | Initial version published |
+## Feedback and Support
+If you encounter issues or have questions about the feed, please contact us:
+
+- **Email**: [getinvolved@goodgym.org](mailto:getinvolved@goodgym.org)
+- **Phone**: 020 3642 0997
+
+## License
+This data feed is provided under the [OpenActive License](https://www.openactive.io/licensing-policy/).
+
